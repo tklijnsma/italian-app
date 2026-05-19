@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: italian-grammar-practice-api
+    runtime: python
+    plan: free
+    branch: prod
+    buildCommand: pip install .
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.15

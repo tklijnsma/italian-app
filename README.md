@@ -22,6 +22,18 @@ The API starts at `http://127.0.0.1:8000`.
 
 CORS is permissive (`*`) so a separately hosted React/static frontend, including GitHub Pages or local dev servers, can call it.
 
+## Deploy on Render
+
+This repo includes `render.yaml` for a Render Free web service.
+
+Use the `prod` branch for deployment. Render settings are:
+
+- Build command: `pip install .`
+- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+- Health check path: `/health`
+
+The service uses in-memory exercise storage, so generated exercise IDs are lost whenever the free instance restarts or spins down.
+
 ## Run Tests
 
 ```bash
