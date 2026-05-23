@@ -8,7 +8,13 @@ app = FastAPI(title="Italian Grammar Practice API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:3000",
+        "https://italian-app.github.io",
+    ],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],

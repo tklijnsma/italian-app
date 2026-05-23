@@ -23,6 +23,19 @@ def test_exercise_groups_returns_all_groups():
     assert {group["id"] for group in groups} == set(GENERATORS_BY_GROUP_ID)
 
 
+def test_cors_allows_github_pages_frontend():
+    response = client.options(
+        "/health",
+        headers={
+            "Origin": "https://italian-app.github.io",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "https://italian-app.github.io"
+
+
 def test_generate_endpoint_works_for_all_groups():
     for group_id in GENERATORS_BY_GROUP_ID:
         response = client.post("/exercises/generate", json={"group_id": group_id, "seed": 1})
